@@ -19,4 +19,9 @@ public class LevelManagerController : MonoBehaviour
     {
         Debug.Log("Level load requested for " + name);
     }
+
+    public void QuitRequest()
+    {
+        Application.Quit();
+    }
 }
