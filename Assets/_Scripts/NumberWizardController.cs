@@ -33,7 +33,7 @@ public class NumberWizardController : MonoBehaviour
 
         min = 1;
         max = 1000;
-        guess = 500;
+        NextGuess();
 
         SetGuessText(guess.ToString());
 
@@ -42,7 +42,7 @@ public class NumberWizardController : MonoBehaviour
 
     void NextGuess()
     {
-        guess = (max + min) / 2;
+        guess = Random.Range(min, max + 1);
         guessAmount++;
         SetGuessText(guess.ToString());
 
