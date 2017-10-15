@@ -1,60 +1,59 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class NumberWizardController : MonoBehaviour
 {
-    int min, max, guess;
+    int min, max, guess, maxGuessesAllowed, guessAmount;
+
+    public Text guessText;
+
 	// Use this for initialization
 	void Start ()
     {
         StartGame();
 	}
-
-	// Update is called once per frame
-    void Update ()
+    
+    public void GuessHigher()
     {
-        if(Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            min = guess;
-            NextGuess();
-            PrintGuess();
-        }
-        else if(Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            max = guess;
-            NextGuess();
-            PrintGuess();
-        }
-        else if(Input.GetKeyDown(KeyCode.Return))
-        {
-            print("I won!");
-            StartGame();
-        }
+        min = guess;
+        NextGuess();
+    }
+
+    public void GuessLower()
+    {
+        max = guess;
+        NextGuess();
     }
     
     void StartGame()
     {
+        maxGuessesAllowed = 10;
+        guessAmount = 0;
+
         min = 1;
         max = 1000;
         guess = 500;
 
-        print("Welcome to Number Wizard!");
-        print("Pick a number in your head, but don't tell me!");
+        SetGuessText(guess.ToString());
 
-        print("The lowest number you can choose is: " + min);
-        print("The highest number you can pick is : " + max);
         max++;
-
-        PrintGuess();
-    }
-
-    void PrintGuess()
-    {
-        print("Is your number higher or lower than " + guess + "?");
-        print("Up = higher, down = lower, return = equal.");
     }
 
     void NextGuess()
     {
         guess = (max + min) / 2;
+        guessAmount++;
+        SetGuessText(guess.ToString());
+
+        if (guessAmount.Equals(maxGuessesAllowed))
+        {
+            SceneManager.LoadScene("Win");
+        }
+    }
+
+    void SetGuessText(string guess)
+    {
+        guessText.text = guess.ToString();
     }
 }
