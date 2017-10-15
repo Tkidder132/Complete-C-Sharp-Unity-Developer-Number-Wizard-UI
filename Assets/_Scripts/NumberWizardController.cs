@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class NumberWizardController : MonoBehaviour
 {
     int min, max, guess, maxGuessesAllowed, guessAmount;
+
+    public Text guessText;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -30,7 +34,9 @@ public class NumberWizardController : MonoBehaviour
         min = 1;
         max = 1000;
         guess = 500;
-        
+
+        SetGuessText(guess.ToString());
+
         max++;
     }
 
@@ -38,10 +44,16 @@ public class NumberWizardController : MonoBehaviour
     {
         guess = (max + min) / 2;
         guessAmount++;
+        SetGuessText(guess.ToString());
 
         if (guessAmount.Equals(maxGuessesAllowed))
         {
-            SceneManager.LoadScene("win");
+            SceneManager.LoadScene("Win");
         }
+    }
+
+    void SetGuessText(string guess)
+    {
+        guessText.text = guess.ToString();
     }
 }
