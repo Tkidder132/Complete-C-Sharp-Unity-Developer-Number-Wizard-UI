@@ -9,26 +9,16 @@ public class NumberWizardController : MonoBehaviour
         StartGame();
 	}
 
-	// Update is called once per frame
-    void Update ()
+    public void GuessHigher()
     {
-        if(Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            min = guess;
-            NextGuess();
-            PrintGuess();
-        }
-        else if(Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            max = guess;
-            NextGuess();
-            PrintGuess();
-        }
-        else if(Input.GetKeyDown(KeyCode.Return))
-        {
-            print("I won!");
-            StartGame();
-        }
+        min = guess;
+        NextGuess();
+    }
+
+    public void GuessLower()
+    {
+        max = guess;
+        NextGuess();
     }
     
     void StartGame()
@@ -36,21 +26,8 @@ public class NumberWizardController : MonoBehaviour
         min = 1;
         max = 1000;
         guess = 500;
-
-        print("Welcome to Number Wizard!");
-        print("Pick a number in your head, but don't tell me!");
-
-        print("The lowest number you can choose is: " + min);
-        print("The highest number you can pick is : " + max);
+        
         max++;
-
-        PrintGuess();
-    }
-
-    void PrintGuess()
-    {
-        print("Is your number higher or lower than " + guess + "?");
-        print("Up = higher, down = lower, return = equal.");
     }
 
     void NextGuess()
